@@ -1,0 +1,30 @@
+.step2 {
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.step2 canvas {
+	box-sizing: border-box;
+}
+
+.step2 video {
+	opacity: 0.9;
+}
+
+.step2 canvas.image-landscape.window-landscape {
+	height: 98vh;
+}
+
+.step2 canvas.image-landscape.window-portrait {
+	width: 98vw;
+}
+
+.step2 canvas.image-portrait.window-landscape {
+	height: 98vh;
+}
+
+.step2 canvas.image-portrait.window-portrait {
+	width: 98vw;
+}

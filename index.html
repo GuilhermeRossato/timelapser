@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Timelapser</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<link rel="stylesheet" href="step1.css" />
+  		<link rel="stylesheet" href="step2.css" />
+		<script src="step1.js"></script>
+		<script src="step2.js"></script>
+	</head>
+	<body style="">
+		<div class="step1" style="display: none;">
+			<input type="file" accept="image/*" onchange="onImageChange(event)" />
+		</div>
+		<div class="step2" style="display: none">
+			<canvas class="background"></canvas>
+		</div>
+		<script>
+			window.addEventListener("load", step1);
+		</script>
+	</body>
+</html>
