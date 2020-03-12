@@ -1,7 +1,7 @@
 function step2(image) {
 	const step = document.querySelector(".step2");
 	step.style.display = "flex";
-	const [background] = step.querySelectorAll("canvas");
+	const background = step.querySelector("canvas");
 
 	background.width = image.width;
 	background.height = image.height;
@@ -40,19 +40,31 @@ function step2(image) {
 	ctx.restore();
 
 
-	/* Setting up the constraint */
-	const facingMode = "user"; // Can be 'user' or 'environment' to access back or front camera (NEAT!)
-	const constraints = {
-		audio: false,
-		video: {
-			facingMode: facingMode
-		}
-	};
-	setTimeout(() => navigator.mediaDevices.getUserMedia(constraints).then(acceptStream), 140);
+	if (!window.hasInitializedStep2) {
+		window.hasInitializedStep2 = true;
+
+		/* Setting up the constraint */
+		const facingMode = "user"; // Can be 'user' or 'environment' to access back or front camera (NEAT!)
+		const constraints = {
+			audio: false,
+			video: {
+				facingMode: facingMode
+			}
+		};
+		setTimeout(() => navigator.mediaDevices.getUserMedia(constraints).then(acceptStream), 140);
+	} else {
+		setTimeout(() => {
+			const video = document.querySelector(".step2 video");
+			const rect = background.getBoundingClientRect();
+			video.width = rect.width;
+			video.height = rect.height;
+			video.setAttribute("style", `margin-left: ${-video.width}px;`);
+		}, 140);
+	}
 }
 
 function acceptStream(stream) {
-	console.log(stream);
+	window.videoStream = stream;
 	const step = document.querySelector(".step2");
 	const canvas = document.querySelector("canvas");
 	const rect = canvas.getBoundingClientRect();
@@ -60,9 +72,15 @@ function acceptStream(stream) {
 	video.setAttribute('playsinline', '');
 	video.setAttribute('autoplay', '');
 	video.setAttribute('muted', '');
-	video.width = stream.width || rect.width;
-	video.height = stream.height || rect.height;
+	video.width = rect.width;
+	video.height = rect.height;
 	video.srcObject = stream;
-	video.setAttribute("style", `margin-left: ${-video.width}px;`);
+	video.setAttribute("style", `margin-left: ${-video.width}px; width: ${rect.width}px; height: ${rect.height}px`);
 	step.appendChild(video);
+	step3();
+}
+
+function setVideoOpacity(opacity) {
+	const video = document.querySelector(".step2 video");
+	video.style.opacity = opacity;
 }

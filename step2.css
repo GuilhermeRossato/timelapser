@@ -14,17 +14,17 @@
 }
 
 .step2 canvas.image-landscape.window-landscape {
-	height: 98vh;
+	width: 97vw;
 }
 
 .step2 canvas.image-landscape.window-portrait {
-	width: 98vw;
+	width: 97vw;
 }
 
 .step2 canvas.image-portrait.window-landscape {
-	height: 98vh;
+	height: 97vh;
 }
 
 .step2 canvas.image-portrait.window-portrait {
-	width: 98vw;
+	width: 97vw;
 }

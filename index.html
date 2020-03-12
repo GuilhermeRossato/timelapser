@@ -5,15 +5,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<link rel="stylesheet" href="step1.css" />
   		<link rel="stylesheet" href="step2.css" />
+  		<link rel="stylesheet" href="step3.css" />
 		<script src="step1.js"></script>
 		<script src="step2.js"></script>
+		<script src="step3.js"></script>
 	</head>
-	<body style="">
+	<body>
 		<div class="step1" style="display: none;">
 			<input type="file" accept="image/*" onchange="onImageChange(event)" />
 		</div>
-		<div class="step2" style="display: none">
+		<div class="step2" style="display: none;">
 			<canvas class="background"></canvas>
+		</div>
+		<div class="step3" style="display: none;">
+			<h1></h1>
+			<button onclick="takePicture(0)">Take picture instantly</button>
+			<button onclick="takePicture(2.1)">Take picture in 2 seconds</button>
+			<button onclick="takePicture(5.1)">Take picture in 5 seconds</button>
+			<button onclick="takePicture(10.1)">Take picture in 10 seconds</button>
+			<button onclick="changeBackground(event)">Change Background</button>
+			<button onclick="changeOpacity(event)" class="top-right">Change Opacity</button>
+			<button onclick="changeFlicker(event)" class="top-right-bottom flicker">Flicker</button>
 		</div>
 		<script>
 			window.addEventListener("load", step1);
