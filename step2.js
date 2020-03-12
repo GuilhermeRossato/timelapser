@@ -51,7 +51,19 @@ function step2(image) {
 				facingMode: facingMode
 			}
 		};
-		setTimeout(() => navigator.mediaDevices.getUserMedia(constraints).then(acceptStream), 140);
+		if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+			navigator.getMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+			if (navigator.getMedia) {
+				navigator.getMedia(constraints).then((stream) => setTimeout(acceptStream.bind(this, stream), 140)).catch((err) => window.onerror("Problem at old getUserMedia: ", err));
+			} else {
+				document.body.innerHTML = "Error: Missing both \"navigator.getUserMedia\" and \"navigator.mediaDevices.getUserMedia\"<br/><br/>Probably not a secure connection or your browser is not updated";
+				return;
+			}
+		}
+		navigator.mediaDevices.getUserMedia(constraints).then((stream) => setTimeout(acceptStream.bind(this, stream), 140)).catch((err) => window.onerror("Problem at getUserMedia: ", err));
 	} else {
 		setTimeout(() => {
 			const video = document.querySelector(".step2 video");

@@ -14,7 +14,7 @@
 }
 
 .step2 canvas.image-landscape.window-landscape {
-	width: 97vw;
+	height: 97vh;
 }
 
 .step2 canvas.image-landscape.window-portrait {
